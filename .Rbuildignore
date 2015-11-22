@@ -1,5 +1,5 @@
 \.md
-.git*
+.gitignore
 .DS_Store
 .*~
 .travis.yml
