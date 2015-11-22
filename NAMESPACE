@@ -1,7 +1,7 @@
 exportPattern("^[[:alpha:]]+")
 export("thetalogistic", "thetalogistic_D")
 exportMethods(
-    "print"
+    "print",
     "as.mcmc.list",
     "coef",
     "confint",
