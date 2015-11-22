@@ -1,5 +1,5 @@
 exportPattern("^[[:alpha:]]+")
-export("thetalogistic", "thetalogistic_D")
+#export("thetalogistic", "thetalogistic_D")
 exportMethods(
     "as.mcmc.list",
     "coef",
