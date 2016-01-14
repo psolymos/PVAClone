@@ -8,11 +8,11 @@ exportMethods(
 )
 exportClasses(
     "pva",
-     "pvamodel" 
+    "pvamodel"
 )
-importFrom(stats, quantile)
+importFrom(stats, quantile, dnorm, dpois)
 importFrom(stats4, update, coef, vcov, confint, summary)
-importFrom(methods, show)
+importFrom(methods, show, as, new)
 importFrom(coda, "varnames<-")
 importFrom(dcmle, dcmle, nchain, makeDcFit)
 importClassesFrom(dcmle, dcmle)
