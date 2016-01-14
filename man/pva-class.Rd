@@ -44,7 +44,6 @@ Class \code{"\linkS4class{dcmle}"}, directly.
 }
 \section{Methods}{
   \describe{
-    \item{as.mcmc.list}{\code{signature(x = "pva")}}
     \item{coef}{\code{signature(object = "pva")}}
     \item{confint}{\code{signature(object = "pva")}}
     \item{show}{\code{signature(object = "pva")}}
