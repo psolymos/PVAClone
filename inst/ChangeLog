@@ -2,6 +2,10 @@ Version: 0.1-4
 Date: 2016-01-12
 # PVAClone package version history
 
+## Version 0.1-5, Jan 14, 2016
+
+*
+
 ## Version 0.1-4, Jan 12, 2016
 
 * R CMD check error fixed: dcmle no longer exports as.mcmc.list.
