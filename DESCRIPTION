@@ -13,6 +13,7 @@ License: GPL-2
 Depends: R (>= 2.15.0), methods, dcmle, dclone, stats4
 Suggests: parallel
 SystemRequirements: JAGS (>= 3.0.0)
-URL: http://cran.r-project.org/package=PVAClone, http://dcr.r-forge.r-project.org/
+URL: https://github.com/psolymos/PVAClone
+BugReports: https://github.com/psolymos/PVAClone/issues
 LazyLoad: yes
 LazyData: true
