@@ -10,7 +10,7 @@ setMethod("summary", "pva", function(object) {
 diagn_scale <-
 function(object) {
     m <- as(as(object, "dcmle"), "mcmc.list")
-    x@model@transf(m)
+    object@model@transf(m)
  }
 
 ## coef method (takes into account fixed values)
