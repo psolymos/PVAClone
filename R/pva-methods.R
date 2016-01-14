@@ -5,11 +5,12 @@ setMethod("summary", "pva", function(object) {
     show(y)
 })
 
-## this extracts mcmc info 
+## this extracts mcmc info
 ## and transforms it to original scale if desired
-setMethod("as.mcmc.list", "pva", 
+setMethod("as.mcmc.list", "pva",
 function(x, diagn_scale=FALSE, ...) {
-    m <- as.mcmc.list(as(x,"dcmle"))
+    #m <- as.mcmc.list(as(x,"dcmle"))
+    m <- as(as(x, "dcmle"), "mcmc.list")
     if (diagn_scale) {
         x@model@transf(m)
     } else {

@@ -1,8 +1,8 @@
 ## this returns the model to be used
 ## no. of parameters in the model
 ## do not allow to fix all params (only p-1) ???
-bevertonholt <- 
-function(obs.error="none", fixed) 
+bevertonholt <-
+function(obs.error="none", fixed)
 {
 
     ## Generalized Beverton-Holt model w/o obs. error
@@ -73,7 +73,7 @@ function(obs.error="none", fixed)
     cm_end_P <- cm_end_0
 
     ## match observation error type
-    obs.error <- match.arg(tolower(obs.error), 
+    obs.error <- match.arg(tolower(obs.error),
         c("none", "normal", "poisson"))
     ## put together the model file
     cm_lik <- switch(obs.error,
@@ -91,11 +91,11 @@ function(obs.error="none", fixed)
         "normal"  = 5)
     ## range of support for parameters
     support <- switch(obs.error,
-        "none"    = rbind(r=c(-Inf, Inf), K=c(.Machine$double.eps, Inf), 
+        "none"    = rbind(r=c(-Inf, Inf), K=c(.Machine$double.eps, Inf),
             theta=c( -Inf, Inf), sigma=c(.Machine$double.eps, Inf)),
-        "poisson" = rbind(r=c(-Inf, Inf), K=c(.Machine$double.eps, Inf), 
+        "poisson" = rbind(r=c(-Inf, Inf), K=c(.Machine$double.eps, Inf),
             theta=c( -Inf, Inf), sigma=c(.Machine$double.eps, Inf)),
-        "normal"  = rbind(r=c(-Inf, Inf), K=c(.Machine$double.eps, Inf), 
+        "normal"  = rbind(r=c(-Inf, Inf), K=c(.Machine$double.eps, Inf),
             theta=c( -Inf, Inf), sigma=c(.Machine$double.eps, Inf),tau=c(.Machine$double.eps, Inf)))
     colnames(support) <- c("Min", "Max")
     ## check range of support and put in fixed values
@@ -158,7 +158,7 @@ function(obs.error="none", fixed)
                 cm_end["lntau"] <- "     lntau <- log(tau)"
             }
         }
-        fixed <- unlist(lapply(fixed, function(z) 
+        fixed <- unlist(lapply(fixed, function(z)
             ifelse(is.numeric(z), z, NA)))
         fixed <- fixed[!is.na(fixed)]
         if (!length(fixed))
@@ -167,8 +167,8 @@ function(obs.error="none", fixed)
     ## put together stuff
     model <- structure(c(cm_lik, unname(cm_end)),
             class = "custommodel")
-    fancy <- c("Generalized Beverton-Holt", 
-        ifelse(obs.error=="none", NA, 
+    fancy <- c("Generalized Beverton-Holt",
+        ifelse(obs.error=="none", NA,
             gsub("\\b(\\w)", "\\U\\1", obs.error, perl=TRUE)))
     ## list params (fixed will not be a parameter)
     params <- switch(obs.error,
@@ -183,7 +183,8 @@ function(obs.error="none", fixed)
 
     ## this scales diagnostic parameters to the scale of the summaries
     backtransf <- function(mcmc, obs.error) {
-        mcmc <- as.mcmc.list(mcmc)
+        #mcmc <- as.mcmc.list(mcmc)
+        mcmc <- as(mcmc, "mcmc.list")
         vn <- varnames(mcmc)
         for (i in seq_len(nchain(mcmc))) {
             if ("z" %in% vn)
@@ -204,7 +205,8 @@ function(obs.error="none", fixed)
     }
     ## this scales summaries to the scale of diagnostic parameters
     transf <- function(mcmc, obs.error) {
-        mcmc <- as.mcmc.list(mcmc)
+        #mcmc <- as.mcmc.list(mcmc)
+        mcmc <- as(mcmc, "mcmc.list")
         vn <- varnames(mcmc)
         for (i in seq_len(nchain(mcmc))) {
             if ("b" %in% vn)
@@ -235,7 +237,7 @@ function(obs.error="none", fixed)
         ## data: data on original scale (this is used to check missing values)
         ## null_obserror: logical, if the null model has obs error
         ## alt_obserror: logical, if the alternative model has obs error
-        "none"    = function(logx, mle, data, 
+        "none"    = function(logx, mle, data,
         null_obserror=FALSE, alt_obserror=FALSE) {
             T <- length(logx)
             m <- which(is.na(data))
@@ -245,10 +247,10 @@ function(obs.error="none", fixed)
                     ## null is NOE, alt is OE, NA present (II.a)
 ##                    ii <- ts_index(data)
 ##                    jj <- setdiff(which(!is.na(data)), ii)
-##                    do <- sum(dnorm(data[jj][-1], 
+##                    do <- sum(dnorm(data[jj][-1],
 ##                        mean= mle["r"] + mle["b"] * data[jj-1][-length(jj)],
 ##                        sd = mle["sigma"], log=TRUE))
-##                    expect <- log(mean(dnorm(data[ii], 
+##                    expect <- log(mean(dnorm(data[ii],
 ##                        mean= mle["a"] + mle["b"] * logx[ii-1],
 ##                        sd = mle["sigma"], log=FALSE)))
 ##                    rval <- do + expect
@@ -281,7 +283,7 @@ function(obs.error="none", fixed)
             rval
         },
         ## data on the log scale
-        "poisson" = function(logx, mle, data, 
+        "poisson" = function(logx, mle, data,
         null_obserror=FALSE, alt_obserror=FALSE) {
             T <- length(data)
             if (!(!null_obserror && any(is.na(data)))) {
@@ -298,7 +300,7 @@ function(obs.error="none", fixed)
             rval
         },
         ## data on the log scale
-        "normal"  = function(logx, mle, data, 
+        "normal"  = function(logx, mle, data,
         null_obserror=FALSE, alt_obserror=FALSE) {
             T <- length(data)
             if (!(!null_obserror && any(is.na(data)))) {
@@ -311,8 +313,8 @@ function(obs.error="none", fixed)
                 rval <- sum(logd1) + sum(logd2, na.rm=TRUE)
             } else {
                 stop("not yet implemented")
-#                rval <- sum(dnorm(data, 
-#                    mean=logx, 
+#                rval <- sum(dnorm(data,
+#                    mean=logx,
 #                    sd=mle["sigma"], log=TRUE), na.rm=TRUE)
             }
             rval

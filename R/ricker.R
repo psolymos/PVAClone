@@ -1,8 +1,8 @@
 ## this returns the model to be used
 ## no. of parameters in the model
 ## do not allow to fix all params (only p-1) ??? ##Correct##
-ricker <- 
-function(obs.error="none", fixed) 
+ricker <-
+function(obs.error="none", fixed)
 {
 
     ## Ricker model w/o obs. error
@@ -73,7 +73,7 @@ function(obs.error="none", fixed)
     cm_end_P <- cm_end_0
 
     ## match observation error type
-    obs.error <- match.arg(tolower(obs.error), 
+    obs.error <- match.arg(tolower(obs.error),
         c("none", "normal", "poisson"))
     ## put together the model file
     cm_lik <- switch(obs.error,
@@ -91,11 +91,11 @@ function(obs.error="none", fixed)
         "normal"  = 4)
     ## range of support for parameters
     support <- switch(obs.error,
-        "none"    = rbind(a=c(-Inf, Inf), b=c(-Inf, Inf), 
+        "none"    = rbind(a=c(-Inf, Inf), b=c(-Inf, Inf),
             sigma=c(.Machine$double.eps, Inf)),
-        "poisson" = rbind(a=c(-Inf, Inf), b=c(-Inf, Inf), 
+        "poisson" = rbind(a=c(-Inf, Inf), b=c(-Inf, Inf),
             sigma=c(.Machine$double.eps, Inf)),
-        "normal"  = rbind(a=c(-Inf, Inf), b=c(-Inf, Inf), 
+        "normal"  = rbind(a=c(-Inf, Inf), b=c(-Inf, Inf),
             sigma=c(.Machine$double.eps, Inf), tau=c(.Machine$double.eps, Inf)))
     colnames(support) <- c("Min", "Max")
     ## check range of support and put in fixed values
@@ -149,7 +149,7 @@ function(obs.error="none", fixed)
                 cm_end["lntau"] <- "     lntau <- log(tau)"
             }
         }
-        fixed <- unlist(lapply(fixed, function(z) 
+        fixed <- unlist(lapply(fixed, function(z)
             ifelse(is.numeric(z), z, NA)))
         fixed <- fixed[!is.na(fixed)]
         if (!length(fixed))
@@ -158,8 +158,8 @@ function(obs.error="none", fixed)
     ## put together stuff
     model <- structure(c(cm_lik, unname(cm_end)),
             class = "custommodel")
-    fancy <- c("Ricker", 
-        ifelse(obs.error=="none", NA, 
+    fancy <- c("Ricker",
+        ifelse(obs.error=="none", NA,
             gsub("\\b(\\w)", "\\U\\1", obs.error, perl=TRUE)))
     ## list params (fixed will not be a parameter)
     params <- switch(obs.error,
@@ -174,7 +174,8 @@ function(obs.error="none", fixed)
 
     ## this scales diagnostic parameters to the scale of the summaries
     backtransf <- function(mcmc, obs.error) {
-        mcmc <- as.mcmc.list(mcmc)
+        #mcmc <- as.mcmc.list(mcmc)
+        mcmc <- as(mcmc, "mcmc.list")
         vn <- varnames(mcmc)
         for (i in seq_len(nchain(mcmc))) {
             if ("lnsigma" %in% vn)
@@ -191,7 +192,8 @@ function(obs.error="none", fixed)
     }
     ## this scales summaries to the scale of diagnostic parameters
     transf <- function(mcmc, obs.error) {
-        mcmc <- as.mcmc.list(mcmc)
+        #mcmc <- as.mcmc.list(mcmc)
+        mcmc <- as(mcmc, "mcmc.list")
         vn <- varnames(mcmc)
         for (i in seq_len(nchain(mcmc))) {
             if ("sigma" %in% vn)
@@ -210,7 +212,7 @@ function(obs.error="none", fixed)
         ## data on the log scale (logx)
         ## w/o missing data, log is the log data
         ## w/ missing values both logx (missing) and data should be provided
-        "none"    = function(logx, mle, data, 
+        "none"    = function(logx, mle, data,
         null_obserror=FALSE, alt_obserror=FALSE) {
             T <- length(logx)
             m <- which(is.na(data))
@@ -238,7 +240,7 @@ function(obs.error="none", fixed)
                 ## null is NOE, alt is NOE, NA absent (III.b)
                 } else {
 #                    dnorm((logx[-1])[m-1],
-#                        mean = (logx[-T])[m] + mle["a"] + 
+#                        mean = (logx[-T])[m] + mle["a"] +
 #                            mle["b"] * exp((logx[-T])[m]),
 #                        sd = mle["sigma"], log=TRUE)
                     0
@@ -248,7 +250,7 @@ function(obs.error="none", fixed)
             rval
         },
         ## data on the log scale
-        "poisson" = function(logx, mle, data, 
+        "poisson" = function(logx, mle, data,
         null_obserror=FALSE, alt_obserror=FALSE) {
             T <- length(data)
             if (!(!null_obserror && any(is.na(data)))) {
@@ -263,7 +265,7 @@ function(obs.error="none", fixed)
             rval
         },
         ## data on the log scale
-        "normal"  = function(logx, mle, data, 
+        "normal"  = function(logx, mle, data,
         null_obserror=FALSE, alt_obserror=FALSE) {
             T <- length(data)
             if (!(!null_obserror && any(is.na(data)))) {
@@ -302,4 +304,3 @@ function(obs.error="none", fixed)
 #ricker("Pois")
 #ricker("normal")
 #ricker("normal", fixed=c(a=5, sigma=0.5))
-

@@ -1,5 +1,5 @@
 ## here the magic happens
-pva <- 
+pva <-
 function(x, model, n.clones, ...)
 {
     if (all(n.clones <= 1))
@@ -29,9 +29,9 @@ function(x, model, n.clones, ...)
         dcf@data$y <- dcdim(data.matrix(log(x)))
     if (model@obs.error == "poisson")
         dcf@data$O <- dcdim(data.matrix(x))
-    fit <- dcmle(dcf, n.clones=n.clones, 
+    fit <- dcmle(dcf, n.clones=n.clones,
         nobs=as.integer(sum(!is.na(x))), ...)
-    fit0 <- as(model@backtransf(as.mcmc.list(fit)), "dcmle")
+    fit0 <- as(model@backtransf(as(fit, "mcmc.list")), "dcmle")
     ## summary (coef/fullcoef) and vcov is on original scale
     ## mcmc.list and diagnostics are on transformed scale
     s0 <- summary(fit0)@coef
@@ -54,7 +54,7 @@ function(x, model, n.clones, ...)
         summary = s,
         observations = x,
         model = model)
-    fit@model@genmodel <- suppressWarnings(eval(call(model@growth.model, 
+    fit@model@genmodel <- suppressWarnings(eval(call(model@growth.model,
         obs.error=model@obs.error, fixed=coef(fit)))@model)
     fit@dcdata <- dcf
     fit@call <- match.call()
