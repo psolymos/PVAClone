@@ -12,6 +12,7 @@ Description: Likelihood based population viability analysis in the
 License: GPL-2
 Depends: R (>= 2.15.0), methods, dcmle, dclone, stats4
 Suggests: parallel
+Imports: coda
 SystemRequirements: JAGS (>= 3.0.0)
 URL: https://github.com/psolymos/PVAClone
 BugReports: https://github.com/psolymos/PVAClone/issues
