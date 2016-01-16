@@ -9,7 +9,7 @@ setMethod("summary", "pva", function(object) {
 ## and transforms it to original scale if desired
 diagn_scale <-
 function(object) {
-    m <- as(as(object, "dcmle"), "mcmc.list")
+    m <- as(as(object, "dcmle"), "MCMClist")
     object@model@transf(m)
  }
 

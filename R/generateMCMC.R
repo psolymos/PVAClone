@@ -1,6 +1,6 @@
 ## how to generate missing values
 ## this is not predicting !!!
-#generateMissing <- 
+#generateMissing <-
 #function(x, ...)
 #{
 #    if (!inherits(x, "pva"))
@@ -16,7 +16,7 @@
 #    dcd <- x@dcdata
 #    dcd@model <- x@model@predmodel
 #    Params <- paste(node, "[",i,",1]",sep="")
-#    f <- jags.fit(dcd@data, 
+#    f <- jags.fit(dcd@data,
 #        params=Params,
 #        model=dcd@model, ...)
 #    pred <- as.matrix(f)
@@ -29,7 +29,7 @@
 #    pred
 #}
 ## how to generate latent log abundances (not prediction)
-generateLatent <- 
+generateLatent <-
 function(x, ...)
 {
     if (!inherits(x, "pva"))
@@ -42,8 +42,8 @@ function(x, ...)
             warning("no latent variable in model")
         dcd <- x@dcdata
         dcd@model <- x@model@genmodel
-        f <- jags.fit(dcd@data, 
-            params="x", 
+        f <- jags.fit(dcd@data,
+            params="x",
             model=dcd@model, ...)
         pred <- as.matrix(f)
     }

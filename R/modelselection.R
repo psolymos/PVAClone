@@ -1,6 +1,6 @@
 ## this is the heart of model selection and
 ## profile likelihood
-pva.llr <- 
+pva.llr <-
 function(null, alt, pred)
 {
     if (!inherits(null, "pva"))
@@ -14,8 +14,8 @@ function(null, alt, pred)
         stop("data in null amd alternative model must be identical")
     if (err0 != "none" && err1 == "none")
         stop("switch null and alternative model")
-    if (identical(null@model@growth.model, alt@model@growth.model) && 
-        identical(null@model@obs.error, alt@model@obs.error) && 
+    if (identical(null@model@growth.model, alt@model@growth.model) &&
+        identical(null@model@obs.error, alt@model@obs.error) &&
         (length(null@coef) > length(alt@coef)))
             warning("Hint: check what is null and alternative ",
                 "if models are nested")
@@ -33,11 +33,11 @@ function(null, alt, pred)
         "normal" = log(obs),
         "poisson" = obs)
     ## use here parApply with parallel package -- future stuff
-    logd0 <- apply(pred, 1, null@model@logdensity, 
-        mle=coef(null), data=data0, 
+    logd0 <- apply(pred, 1, null@model@logdensity,
+        mle=coef(null), data=data0,
         null_obserror=err0 != "none", alt_obserror=err1 != "none")
-    logd1 <- apply(pred, 1, alt@model@logdensity, 
-        mle=coef(alt), data=data1, 
+    logd1 <- apply(pred, 1, alt@model@logdensity,
+        mle=coef(alt), data=data1,
         null_obserror=err0 != "none", alt_obserror=err1 != "none")
     ## log likelihood ratio
     if (err0 == "none" && err1 != "none" && any(is.na(obs))) {
@@ -50,12 +50,12 @@ function(null, alt, pred)
 }
 
 ## model selection
-model.select <- 
+model.select <-
 function(null, alt, B=10^4)
 {
     ## generateLatent takes care of the non-obs.err and
     ## missing value cases
-    pred <- suppressWarnings(generateLatent(alt, 
+    pred <- suppressWarnings(generateLatent(alt,
         n.chains=1, n.iter=B))
     llr <- pva.llr(null, alt, pred)
     ## neffective can be different (e.g. Ricer vs. Gompertz)
@@ -66,7 +66,7 @@ function(null, alt, B=10^4)
     rval <- data.frame(log_LR = llr,
         delta_AIC = -2*llr + 2*(p0-p1),
         delta_BIC = -2*llr + log(n0)*p0 - log(n1)*p1,
-        delta_AICc= -2*llr + 2*((p0-p1) + 
+        delta_AICc= -2*llr + 2*((p0-p1) +
             p0*(p0+1)/(n0-p0-1) - p1*(p1+1)/(n0-p1-1)))
     attr(rval, "fancy") <- list(
         data=fancyPVAmodel(null, "", part=2),
@@ -83,7 +83,7 @@ function(null, alt, B=10^4)
     rval
 }
 
-print.pvaModelSelect <- 
+print.pvaModelSelect <-
 function(x, ...)
 {
     f <- attr(x, "fancy")
@@ -112,7 +112,7 @@ function(x, ...)
         } else if (abs(llr) < 8) {
             qualifier <- "better"
         } else qualifier <- "strongly"
-        cat("\n", good, " is ", qualifier, " supported over the ", 
+        cat("\n", good, " is ", qualifier, " supported over the ",
             bad, "\n\n", sep="")
     }
     invisible(x)

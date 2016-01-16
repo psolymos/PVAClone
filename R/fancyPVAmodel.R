@@ -1,11 +1,11 @@
 ## this creates fancy model description for show/summary methods
-fancyPVAmodel <- 
+fancyPVAmodel <-
 function(object, initial="PVA object:\n", part=1:2)
 {
     fn <- object@model@fancy
     growth.model <- paste(fn[1], "growth model")
     obs.error <- if (is.na(fn[2])) {
-        " without observation error" 
+        " without observation error"
     } else {
         paste(" with", fn[2], "observation error")
     }

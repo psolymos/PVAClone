@@ -1,7 +1,7 @@
 ## this declares S4 class pvamodel
-setClass("pvamodel", 
+setClass("pvamodel",
     representation(
-        growth.model="character", 
+        growth.model="character",
         obs.error="character",
         model="dcModel",
         genmodel="dcModel",
@@ -17,10 +17,10 @@ setClass("pvamodel",
         neffective="function"))
 
 ## this declares inheritance and extension for 'pva' S4 class
-setClass("pva", 
+setClass("pva",
     representation(
-        observations="numeric", 
+        observations="numeric",
         model="pvamodel",
         summary="matrix",
-        dcdata="dcFit"), 
+        dcdata="dcFit"),
     contains = c("dcmle"))

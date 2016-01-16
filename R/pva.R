@@ -31,7 +31,8 @@ function(x, model, n.clones, ...)
         dcf@data$O <- dcdim(data.matrix(x))
     fit <- dcmle(dcf, n.clones=n.clones,
         nobs=as.integer(sum(!is.na(x))), ...)
-    fit0 <- as(model@backtransf(as(fit, "mcmc.list")), "dcmle")
+    fit0 <- as(model@backtransf(as(fit, "MCMClist")), "dcmle")
+#    fit0 <- as(model@backtransf(as(fit, "mcmc.list")), "dcmle")
     ## summary (coef/fullcoef) and vcov is on original scale
     ## mcmc.list and diagnostics are on transformed scale
     s0 <- summary(fit0)@coef

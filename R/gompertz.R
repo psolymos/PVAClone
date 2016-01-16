@@ -182,7 +182,7 @@ function(obs.error="none", fixed)
     ## this scales diagnostic parameters to the scale of the summaries
     backtransf <- function(mcmc, obs.error) {
         #mcmc <- as.mcmc.list(mcmc)
-        mcmc <- as(mcmc, "mcmc.list")
+        mcmc <- as(mcmc, "MCMClist")
         vn <- varnames(mcmc)
         for (i in seq_len(nchain(mcmc))) {
             if ("z" %in% vn)
@@ -204,7 +204,7 @@ function(obs.error="none", fixed)
     ## this scales summaries to the scale of diagnostic parameters
     transf <- function(mcmc, obs.error) {
         #mcmc <- as.mcmc.list(mcmc)
-        mcmc <- as(mcmc, "mcmc.list")
+        mcmc <- as(mcmc, "MCMClist")
         vn <- varnames(mcmc)
         for (i in seq_len(nchain(mcmc))) {
             if ("b" %in% vn)
