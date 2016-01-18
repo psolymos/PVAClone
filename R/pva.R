@@ -2,6 +2,8 @@
 pva <-
 function(x, model, n.clones, ...)
 {
+    if (!is.numeric(x))
+        stop("x must be numeric: try using as.numeric(x)")
     if (all(n.clones <= 1))
         stop("data cloning is required, set n.clones properly")
     if (any(is.na(x[c(1, length(x))])))
