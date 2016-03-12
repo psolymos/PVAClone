@@ -4,7 +4,7 @@ exportMethods(
     "coef",
     "confint",
     "summary",
-    "vcov" 
+    "vcov"
 )
 exportClasses(
     "pva",
@@ -14,7 +14,7 @@ importFrom(stats, quantile, dnorm, dpois)
 importFrom(stats4, update, coef, vcov, confint, summary)
 importFrom(methods, show, as, new)
 importFrom(coda, "varnames<-")
-importFrom(dcmle, dcmle, nchain, makeDcFit)
+importFrom(dcmle, dcmle, nchain, makeDcFit, varnames)
 importClassesFrom(dcmle, dcmle)
 importFrom(dclone, jags.fit, dc.fit, dcdim)
 S3method(print, pvaModelSelect)
