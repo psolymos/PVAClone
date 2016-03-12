@@ -31,15 +31,22 @@ setMethod("vcov", "pva", function(object) {
     rv[i,i] <- vc
     rv
 })
-setMethod("confint", "pva", function(object) {
-    ci <- confint(diagn_scale(object))
+setMethod("confint", "pva", function(object, diagn_scale=FALSE) {
+    if (diagn_scale) {
+        objt <- diagn_scale(object)
+    } else {
+        objt <- as(as(object, "dcmle"), "MCMClist")
+    }
+    ci <- confint(objt)
     fx <- object@model@fixed
     if (is.null(fx))
         return(ci)
     vn <- object@model@varnames
-    rv <- matrix(NA, length(vn), 2)
-    dimnames(rv) <- list(vn, colnames(ci))
-    i <- !(vn %in% names(fx))
-    rv[i,] <- ci
+    vno <- varnames(object)
+    vnt <- varnames(objt)
+    vnf <- vnt[match(vn, vno)]
+    vnf[is.na(vnf)] <- vn[is.na(vnf)]
+    rv <- ci[match(vnf, rownames(ci)),]
+    rownames(rv)[is.na(rownames(rv))] <- vnf[is.na(rownames(rv))]
     rv
 })

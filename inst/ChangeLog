@@ -1,5 +1,13 @@
 # PVAClone package version history
 
+## Version 0.1-6, March 11, 2016
+
+* Name matching was confused by diagnostic scale names
+  for the confint method when fixed parameters were in the model.
+  Method now use the reporting scale with an optional argument
+  diagn_scale=FALSE by default. Sorting of names is now fixed.
+  Reported by Cheyenne Gerdes (Missouri State Univ.).
+
 ## Version 0.1-5, Jan 14, 2016
 
 * dcmle package updates led to errors when fitting models
