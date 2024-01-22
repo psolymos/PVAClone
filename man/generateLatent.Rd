@@ -23,7 +23,7 @@ It uses MLE from a fitted PVA model
 to generate values for the latent variables.
 }
 \value{
-A marix with \code{n.iter * n.chains} rows and as
+A matrix with \code{n.iter * n.chains} rows and as
 many columns as the length of the time series.
 }
 \references{

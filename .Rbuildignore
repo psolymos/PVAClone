@@ -2,6 +2,6 @@
 .gitignore
 .DS_Store
 .*~
-.travis.yml
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^RELEASE\.R$

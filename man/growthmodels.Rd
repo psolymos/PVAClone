@@ -69,7 +69,7 @@ E[t] ~ Normal(0, sigma^2+sigma.d^2)}, where \eqn{sigma.d^2}{sigma.d^2}
 is the demographic variability. If \eqn{sigma.d^2}{sigma.d^2} is 
 missing or fixed at zero, Theta-Logistic model is fitted instead.
 
-Generilzed Beverton-Holt (\code{bevertonholt}):
+Generalized Beverton-Holt (\code{bevertonholt}):
 \deqn{x_{t} = x_{t-1} + r- log[1+(e^{x_{t-1}}/K)^theta] + \epsilon_{t}}{%
 x[t] = x[t-1] + r-[1+(e^(x[t-1])/K)^theta] + E[t]}
 where \eqn{x_{t}}{x[t]} is log abundance at time 
@@ -82,7 +82,7 @@ Observation error models are described in the help page of
 The argument \code{fixed} can be used to fit the model assuming 
 \emph{a priori} values of a subset of the parameters. For instance,
 fixing theta equal to one reduces Theta-Logistic and 
-Gnerelized Beverton-Holt models to Logistic and Beverton-Holt 
+Generalized Beverton-Holt models to Logistic and Beverton-Holt 
 models respectively. The number of parameters that should be 
 fixed at most is \eqn{p-1}, where \eqn{p} is the dimension of 
 the full model. See examples below and in \code{\link{pva}} 

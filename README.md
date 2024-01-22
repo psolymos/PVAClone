@@ -7,13 +7,9 @@ and forecast various growth model types using data cloning.
 
 ## Versions
 
-### CRAN release version
+[![CRAN version](http://www.r-pkg.org/badges/version/PVAClone)](https://CRAN.R-project.org/package=PVAClone) [![](http://cranlogs.r-pkg.org/badges/grand-total/PVAClone)](https://CRAN.R-project.org/package=PVAClone)
 
-[![CRAN version](http://www.r-pkg.org/badges/version/PVAClone)](http://cran.rstudio.com/web/packages/PVAClone/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/PVAClone)](http://cran.rstudio.com/web/packages/PVAClone/index.html)
-
-### Build status for development version
-
-[![Build Status](https://travis-ci.org/psolymos/PVAClone.svg?branch=master)](https://travis-ci.org/psolymos/PVAClone)
+Use `install.packages('PVAClone')` to get the CRAN version, or `install.packages('PVAClone', repos = 'https://psolymos.r-universe.dev')` to get the development version from R-universe.
 
 ## Report a problem
 

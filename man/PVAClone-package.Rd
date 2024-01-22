@@ -2,9 +2,6 @@
 \alias{PVAClone-package}
 \alias{PVAClone}
 \alias{pvaclone}
-\alias{PVA-package}
-\alias{pva-package}
-\alias{Pva-package}
 \alias{PVA}
 \alias{Pva}
 \docType{package}
@@ -35,7 +32,7 @@ Growth models: \code{\link{gompertz}}, \code{\link{ricker}},
 \author{
 Khurram Nadeem, Peter Solymos
 
-Maintainer: Peter Solymos <solymos@ualberta.ca>
+Maintainer: Peter Solymos <psolymos@gmail.com>
 }
 \references{
 Nadeem, K., Lele S. R., 2012.  
