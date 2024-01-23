@@ -88,7 +88,7 @@ observation error. Oikos 121, 1656--1664.
 
 Solymos, P., 2010. dclone: Data Cloning in R.
 The R Journal 2(2), 29--37. URL:
-\url{https://doi.org/10.32614/RJ-2010-011}
+\doi{10.32614/RJ-2010-011}
 
 }
 \author{
