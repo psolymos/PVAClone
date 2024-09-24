@@ -40,7 +40,7 @@ Objects can be created by calls of the form \code{new("pva", ...)}.
   }
 }
 \section{Extends}{
-Class \code{"\linkS4class{dcmle}"}, directly.
+The dcmle S4 class from the dcmle R package, directly.
 }
 \section{Methods}{
   \describe{
