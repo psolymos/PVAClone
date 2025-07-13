@@ -1,3 +1,8 @@
+# Version 0.1-8, July 12, 2025
+
+* Fixed documentation.
+* Authors@R field in DESCRIPTION.
+
 # Version 0.1-7, January 22, 2024
 
 * Fixed Rd files to pass latest R CMD checks.
